@@ -10,5 +10,5 @@ WORKDIR /app
 COPY --from=build /app/target/api-gateway-1.0-SNAPSHOT.jar app.jar
 
 # Exponer puerto y ejecutar la aplicación
-EXPOSE 8081
+EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
