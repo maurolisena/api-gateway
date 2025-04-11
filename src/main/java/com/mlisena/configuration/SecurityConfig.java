@@ -19,8 +19,30 @@ public class SecurityConfig {
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange(exchange -> exchange
                     .pathMatchers("/realms/**").permitAll()
-                    .pathMatchers("/login/**", "/oauth2/**").permitAll()
-                    .pathMatchers("/api/products/**").authenticated()
+                    .pathMatchers(
+                        "/login/**",
+                        "/oauth2/**"
+                    ).permitAll()
+                    .pathMatchers(
+                        "/product-service/swagger-ui.html",
+                        "/product-service/swagger-ui/**",
+                        "/product-service/v3/api-docs/**"
+                    ).permitAll()
+                    .pathMatchers(
+                        "/booking-service/swagger-ui.html",
+                        "/booking-service/swagger-ui/**",
+                        "/booking-service/v3/api-docs/**"
+                    ).permitAll()
+                    .pathMatchers(
+                        "/swagger-ui.html",
+                        "/swagger-ui/**",
+                        "/v3/api-docs",
+                        "/v3/api-docs/**"
+                    ).permitAll()
+                    .pathMatchers(
+                        "/api/products/**",
+                        "/api/bookings/**"
+                    ).authenticated()
                     .anyExchange().permitAll()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
